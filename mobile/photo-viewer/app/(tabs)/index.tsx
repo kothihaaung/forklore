@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function HomeScreen() {
+export default function TestScreen() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -26,3 +26,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
