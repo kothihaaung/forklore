@@ -452,3 +452,17 @@ Processing by Api::V1::PhotosController#index as HTML
 Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:01:53 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (14.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 31ms (Views: 15.8ms | ActiveRecord: 14.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:01:58 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (1.0ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 2.0ms)
+
+
