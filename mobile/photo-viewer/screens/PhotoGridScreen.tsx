@@ -11,7 +11,7 @@ import {
 import { TouchableOpacity } from "react-native";
 import { usePhotos } from "../hooks/usePhotos";
 import { useTheme } from "@react-navigation/native";
-import { useNavigation, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
@@ -23,11 +23,6 @@ export default function PhotoGridScreen() {
     const { colors } = useTheme();
 
     const router = useRouter();
-    const navigation = useNavigation();
-
-    useEffect(() => {
-        navigation.setOptions({ title: '' });
-    }, [navigation]);
 
     const renderItem = ({ item }: any) => (
         <TouchableOpacity

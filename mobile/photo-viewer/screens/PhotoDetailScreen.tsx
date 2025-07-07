@@ -28,6 +28,7 @@ export default function PhotoDetailScreen() {
 
     // 👇 Dynamically set the screen title
     useEffect(() => {
+        navigation.setOptions({headerBackTitle: 'Back'});
         if (parsedPhoto?.title) {
             navigation.setOptions({ title: parsedPhoto.title });
         }
