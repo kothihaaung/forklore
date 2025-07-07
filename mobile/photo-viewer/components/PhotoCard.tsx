@@ -1,5 +1,5 @@
-import { useTheme, useNavigation } from '@react-navigation/native';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Photo } from '@/models/photo';
 import { useRouter } from 'expo-router';
 
