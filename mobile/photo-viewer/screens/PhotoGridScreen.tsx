@@ -8,8 +8,10 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { usePhotos } from "../hooks/usePhotos";
 import { useTheme } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
@@ -20,15 +22,25 @@ export default function PhotoGridScreen() {
   const { photos, loading, error } = usePhotos();
   const { colors, dark } = useTheme();
 
+    const router = useRouter();
+
   const renderItem = ({ item }: any) => (
-    <View style={[styles.item, { backgroundColor: colors.card }]}>
-      <Image source={{ uri: item.image_url }} style={styles.image} />
-      <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
-      <Text style={[styles.photographer, { color: colors.text }]}>
-        📷 {item.photographer}
-      </Text>
-    </View>
-  );
+  <TouchableOpacity
+    onPress={() =>
+      router.push({
+        pathname: "/detail",
+        params: { photo: JSON.stringify(item) },
+      })
+    }
+    style={[styles.item, { backgroundColor: colors.card }]}
+  >
+    <Image source={{ uri: item.image_url }} style={styles.image} />
+    <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
+    <Text style={[styles.photographer, { color: colors.text }]}>
+      📷 {item.photographer}
+    </Text>
+  </TouchableOpacity>
+);
 
   if (loading) {
     return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
