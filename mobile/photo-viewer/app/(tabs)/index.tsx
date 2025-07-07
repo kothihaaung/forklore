@@ -12,7 +12,7 @@ export default function HomeScreen() {
         styles.container,
         {
           paddingTop: insets.top,
-          paddingBottom: Platform.OS === "android" ? 0 : insets.bottom + 15 + 20,
+          paddingBottom: Platform.OS === "android" ? 0 : insets.bottom + 33 + 16, // 33 for the tab bar height, 16 for bottom padding
         },
       ]}
     >
