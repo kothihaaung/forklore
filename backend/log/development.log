@@ -802,3 +802,10 @@ Processing by Api::V1::PhotosController#index as HTML
 Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 20:43:17 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (5.8ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 12ms (Views: 6.0ms | ActiveRecord: 5.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
