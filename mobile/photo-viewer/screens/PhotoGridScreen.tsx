@@ -1,10 +1,19 @@
 import React from "react";
-import { View, Image, FlatList, StyleSheet, Text, ActivityIndicator, Dimensions } from "react-native";
+import {
+  View,
+  Image,
+  FlatList,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 import { usePhotos } from "../hooks/usePhotos";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
-const itemSize = screenWidth / numColumns - 16;
+const spacing = 16;
+const itemSize = (screenWidth - spacing * (numColumns + 1)) / numColumns;
 
 export default function PhotoGridScreen() {
   const { photos, loading, error } = usePhotos();
@@ -32,17 +41,22 @@ export default function PhotoGridScreen() {
       keyExtractor={(item) => item.id.toString()}
       numColumns={numColumns}
       contentContainerStyle={styles.container}
+      columnWrapperStyle={styles.row}
     />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    padding: spacing,
+  },
+  row: {
+    flex: 1,
+    justifyContent: "space-between",
+    marginBottom: spacing,
   },
   item: {
-    flex: 1,
-    margin: 8,
+    width: itemSize,
     backgroundColor: "#fff",
     borderRadius: 12,
     overflow: "hidden",
