@@ -501,3 +501,59 @@ Processing by Api::V1::PhotosController#index as HTML
 Completed 200 OK in 63ms (Views: 4.3ms | ActiveRecord: 58.4ms (1 query, 0 cached) | GC: 21.6ms)
 
 
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:43:41 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (20.9ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 54ms (Views: 27.2ms | ActiveRecord: 20.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:43:45 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (0.8ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 15ms (Views: 12.8ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 1.9ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:05 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (1.2ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:09 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (0.3ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:24 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (0.4ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:28 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (0.3ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:36 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (1.1ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 19:47:39 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (0.3ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
