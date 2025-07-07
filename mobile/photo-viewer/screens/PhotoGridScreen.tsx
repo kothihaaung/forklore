@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { usePhotos } from "../hooks/usePhotos";
+import { useTheme } from "@react-navigation/native";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
@@ -17,12 +18,15 @@ const itemSize = (screenWidth - spacing * (numColumns + 1)) / numColumns;
 
 export default function PhotoGridScreen() {
   const { photos, loading, error } = usePhotos();
+  const { colors, dark } = useTheme();
 
   const renderItem = ({ item }: any) => (
-    <View style={styles.item}>
+    <View style={[styles.item, { backgroundColor: colors.card }]}>
       <Image source={{ uri: item.image_url }} style={styles.image} />
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.photographer}>📷 {item.photographer}</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{item.title}</Text>
+      <Text style={[styles.photographer, { color: colors.text }]}>
+        📷 {item.photographer}
+      </Text>
     </View>
   );
 
@@ -42,13 +46,14 @@ export default function PhotoGridScreen() {
       numColumns={numColumns}
       contentContainerStyle={styles.container}
       columnWrapperStyle={styles.row}
+      showsVerticalScrollIndicator={false}
     />
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: spacing,
+    paddingHorizontal: spacing,
   },
   row: {
     flex: 1,
@@ -57,7 +62,6 @@ const styles = StyleSheet.create({
   },
   item: {
     width: itemSize,
-    backgroundColor: "#fff",
     borderRadius: 12,
     overflow: "hidden",
     elevation: 2,
@@ -81,6 +85,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingHorizontal: 8,
     paddingBottom: 8,
-    color: "#666",
   },
 });
