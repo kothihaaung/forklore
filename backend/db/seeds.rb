@@ -34,13 +34,30 @@ photo_urls = [
   "https://kothihaaung.github.io/assets/images/food/toast1.jpg"
 ]
 
-photo_urls.each do |url|
+creative_titles = [
+  "Golden Crispy Delight", "Midnight Snack Attack", "Flavors of the East",
+  "Sweet Tooth Fantasy", "Charred to Perfection", "Ocean on a Plate",
+  "Melting Moments", "Piled High & Proud", "Dreamy Dessert Daze",
+  "Stacked Sunday Treats", "A Taste of Italy", "Noodle Nirvana",
+  "Slice of Heaven", "Rolling in Flavor", "Frosted Fun", "Street Food Magic",
+  "Crunchy & Creamy", "Pantry Gourmet", "Classic Comfort", "Seaside Sunset"
+]
+
+photographer_names = [
+  "Liam Wong", "Ava Smith", "Noah Tanaka", "Mia Choi", "Ethan Becker",
+  "Isabella Nguyen", "Lucas Kim", "Sophie Mehta", "Oliver Li", "Emily Tran"
+]
+
+Photo.delete_all
+
+photo_urls.each_with_index do |url, index|
   filename = File.basename(url, ".jpg")
   category = filename.split(/\d+/).first.gsub("-", " ").capitalize
 
   Photo.create!(
-    title: filename.capitalize,
+    title: creative_titles[index % creative_titles.size],
     image_url: url,
-    category: category
+    category: category,
+    photographer: photographer_names.sample
   )
 end
