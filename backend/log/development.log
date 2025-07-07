@@ -809,3 +809,17 @@ Processing by Api::V1::PhotosController#index as HTML
 Completed 200 OK in 12ms (Views: 6.0ms | ActiveRecord: 5.8ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 20:50:08 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (10.4ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 54ms (Views: 42.4ms | ActiveRecord: 10.4ms (1 query, 0 cached) | GC: 10.9ms)
+
+
+Started GET "/api/v1/photos" for 192.168.1.100 at 2025-07-07 20:57:30 +0700
+Processing by Api::V1::PhotosController#index as HTML
+  [1m[36mPhoto Load (6.3ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 13ms (Views: 5.9ms | ActiveRecord: 6.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
