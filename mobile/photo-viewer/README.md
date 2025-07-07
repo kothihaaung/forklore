@@ -1,50 +1,50 @@
-# Welcome to your Expo app 👋
+# 📱 Photo Viewer App (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is the React Native (Expo) front-end for the **Photo Viewer App**, which displays a grid of food photos and allows users to filter by category and view detailed photo information. It connects to a Ruby on Rails backend API that provides photo data.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+- 📷 Responsive photo **grid layout** for iOS & Android
+- 🧭 Category-based **filter bar** to quickly narrow photos
+- 📄 **Detail screen** with full image, title, category, and photographer info
+- 🖼️ Dynamic image height calculation to preserve correct aspect ratio
+- 🧭 Navigation via **Expo Router** (tabs and stacks)
+- 🌙 **Dark and light theme** support using system preferences
+- 📱 Safe Area Insets for top/bottom padding across devices
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Tech Stack
 
-In the output, you'll find options to open the app in a
+- [React Native](https://reactnative.dev/) (via [Expo SDK](https://docs.expo.dev/))
+- [TypeScript](https://www.typescriptlang.org/)
+- [Expo Router](https://expo.github.io/router/)
+- [Axios](https://axios-http.com/) for API requests
+- [`react-native-safe-area-context`](https://github.com/th3rdwave/react-native-safe-area-context) for layout safety
+- Theming via `useColorScheme()` and `useTheme()`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🧪 How to Run the App
 
-## Get a fresh project
+### 1. Install Required Tools
 
-When you're ready, run:
+- Node.js v20+
+- Expo CLI:
+  ```bash
+  npm i @expo/cli
+  ```
+
+### 2. Run the project
 
 ```bash
-npm run reset-project
+cd mobile/photo-viewer
+npm install
+npx expo start 
+
+Press i to open in iOS Simulator (macOS only)
+Press a to open in Android Emulator
+Or scan the QR code using the Expo Go app on your physical device
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
