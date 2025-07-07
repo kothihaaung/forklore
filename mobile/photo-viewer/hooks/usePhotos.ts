@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-export interface Photo {
-  id: number;
-  title: string;
-  image_url: string;
-  category: string;
-  photographer: string;
-}
+import { Photo } from "@/models/photo";
 
 export function usePhotos() {
   const [photos, setPhotos] = useState<Photo[]>([]);
