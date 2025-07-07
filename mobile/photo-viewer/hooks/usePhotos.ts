@@ -17,7 +17,7 @@ export function usePhotos() {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const res = await axios.get<Photo[]>("http://localhost:3000/api/v1/photos");
+        const res = await axios.get<Photo[]>("http://192.168.1.100:3000/api/v1/photos");
         setPhotos(res.data);
       } catch (err) {
         console.error("Failed to fetch photos:", err);
