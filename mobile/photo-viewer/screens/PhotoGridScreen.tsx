@@ -61,7 +61,7 @@ export default function PhotoGridScreen() {
       </View>
 
       {loading ? (
-        <ActivityIndicator size="large" style={{ marginTop: 20 }} />
+        <ActivityIndicator size="small" style={{ marginTop: 20 }} />
       ) : (
         <FlatList
           data={filteredPhotos}
