@@ -126,3 +126,86 @@ Processing by Api::V1::PhotosController#index as */*
 Completed 200 OK in 13ms (Views: 3.5ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mPhoto Delete All (0.4ms)[0m  [1m[31mDELETE FROM "photos" /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Migrating to AddPhotographerToPhotos (20250707095850)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "photos" ADD "photographer" varchar /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250707095850') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mPhoto Delete All (0.4ms)[0m  [1m[31mDELETE FROM "photos" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.7ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Golden Crispy Delight', 'https://kothihaaung.github.io/assets/images/food/burger1.jpg', 'Burger', '2025-07-07 09:59:29.091377', '2025-07-07 09:59:29.091377', 'Noah Tanaka') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Midnight Snack Attack', 'https://kothihaaung.github.io/assets/images/food/burger2.jpg', 'Burger', '2025-07-07 09:59:29.093052', '2025-07-07 09:59:29.093052', 'Ava Smith') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.5ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Flavors of the East', 'https://kothihaaung.github.io/assets/images/food/burger3.jpg', 'Burger', '2025-07-07 09:59:29.099134', '2025-07-07 09:59:29.099134', 'Emily Tran') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Sweet Tooth Fantasy', 'https://kothihaaung.github.io/assets/images/food/cookie1.jpg', 'Cookie', '2025-07-07 09:59:29.100414', '2025-07-07 09:59:29.100414', 'Noah Tanaka') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.6ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Charred to Perfection', 'https://kothihaaung.github.io/assets/images/food/fish1.jpg', 'Fish', '2025-07-07 09:59:29.101468', '2025-07-07 09:59:29.101468', 'Isabella Nguyen') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.5ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Ocean on a Plate', 'https://kothihaaung.github.io/assets/images/food/grill1.jpg', 'Grill', '2025-07-07 09:59:29.103069', '2025-07-07 09:59:29.103069', 'Noah Tanaka') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Melting Moments', 'https://kothihaaung.github.io/assets/images/food/ice-cream1.jpg', 'Ice cream', '2025-07-07 09:59:29.104320', '2025-07-07 09:59:29.104320', 'Ethan Becker') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Piled High & Proud', 'https://kothihaaung.github.io/assets/images/food/ice-cream2.jpg', 'Ice cream', '2025-07-07 09:59:29.105385', '2025-07-07 09:59:29.105385', 'Sophie Mehta') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Dreamy Dessert Daze', 'https://kothihaaung.github.io/assets/images/food/ice-cream3.jpg', 'Ice cream', '2025-07-07 09:59:29.106405', '2025-07-07 09:59:29.106405', 'Sophie Mehta') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Stacked Sunday Treats', 'https://kothihaaung.github.io/assets/images/food/pan-cake1.jpg', 'Pan cake', '2025-07-07 09:59:29.107443', '2025-07-07 09:59:29.107443', 'Isabella Nguyen') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('A Taste of Italy', 'https://kothihaaung.github.io/assets/images/food/pasta1.jpg', 'Pasta', '2025-07-07 09:59:29.108482', '2025-07-07 09:59:29.108482', 'Noah Tanaka') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Noodle Nirvana', 'https://kothihaaung.github.io/assets/images/food/pasta2.jpg', 'Pasta', '2025-07-07 09:59:29.109854', '2025-07-07 09:59:29.109854', 'Oliver Li') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Slice of Heaven', 'https://kothihaaung.github.io/assets/images/food/pizza1.jpg', 'Pizza', '2025-07-07 09:59:29.111035', '2025-07-07 09:59:29.111035', 'Liam Wong') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Rolling in Flavor', 'https://kothihaaung.github.io/assets/images/food/pizza2.jpg', 'Pizza', '2025-07-07 09:59:29.112156', '2025-07-07 09:59:29.112156', 'Sophie Mehta') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Frosted Fun', 'https://kothihaaung.github.io/assets/images/food/pizza3.jpg', 'Pizza', '2025-07-07 09:59:29.113243', '2025-07-07 09:59:29.113243', 'Ethan Becker') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Street Food Magic', 'https://kothihaaung.github.io/assets/images/food/ramen1.jpg', 'Ramen', '2025-07-07 09:59:29.118721', '2025-07-07 09:59:29.118721', 'Emily Tran') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Crunchy & Creamy', 'https://kothihaaung.github.io/assets/images/food/sushi1.jpg', 'Sushi', '2025-07-07 09:59:29.119860', '2025-07-07 09:59:29.119860', 'Isabella Nguyen') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Pantry Gourmet', 'https://kothihaaung.github.io/assets/images/food/sushi2.jpg', 'Sushi', '2025-07-07 09:59:29.121120', '2025-07-07 09:59:29.121120', 'Ava Smith') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Classic Comfort', 'https://kothihaaung.github.io/assets/images/food/sushi3.jpg', 'Sushi', '2025-07-07 09:59:29.122158', '2025-07-07 09:59:29.122158', 'Noah Tanaka') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.4ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Seaside Sunset', 'https://kothihaaung.github.io/assets/images/food/taco1.jpg', 'Taco', '2025-07-07 09:59:29.123182', '2025-07-07 09:59:29.123182', 'Emily Tran') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mPhoto Create (0.5ms)[0m  [1m[32mINSERT INTO "photos" ("title", "image_url", "category", "created_at", "updated_at", "photographer") VALUES ('Golden Crispy Delight', 'https://kothihaaung.github.io/assets/images/food/toast1.jpg', 'Toast', '2025-07-07 09:59:29.124340', '2025-07-07 09:59:29.124340', 'Lucas Kim') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+Started GET "/api/v1/photos" for ::1 at 2025-07-07 17:05:29 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::PhotosController#index as */*
+  [1m[36mPhoto Load (0.9ms)[0m  [1m[34mSELECT "photos".* FROM "photos" /*action='index',application='Backend',controller='photos'*/[0m
+  ↳ app/controllers/api/v1/photos_controller.rb:9:in `index'
+Completed 200 OK in 15ms (Views: 4.1ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
