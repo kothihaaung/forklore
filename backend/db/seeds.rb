@@ -10,10 +10,37 @@
 
 require 'faker'
 
-10.times do
+photo_urls = [
+  "https://kothihaaung.github.io/assets/images/food/burger1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/burger2.jpg",
+  "https://kothihaaung.github.io/assets/images/food/burger3.jpg",
+  "https://kothihaaung.github.io/assets/images/food/cookie1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/fish1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/grill1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/ice-cream1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/ice-cream2.jpg",
+  "https://kothihaaung.github.io/assets/images/food/ice-cream3.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pan-cake1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pasta1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pasta2.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pizza1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pizza2.jpg",
+  "https://kothihaaung.github.io/assets/images/food/pizza3.jpg",
+  "https://kothihaaung.github.io/assets/images/food/ramen1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/sushi1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/sushi2.jpg",
+  "https://kothihaaung.github.io/assets/images/food/sushi3.jpg",
+  "https://kothihaaung.github.io/assets/images/food/taco1.jpg",
+  "https://kothihaaung.github.io/assets/images/food/toast1.jpg"
+]
+
+photo_urls.each do |url|
+  filename = File.basename(url, ".jpg")
+  category = filename.split(/\d+/).first.gsub("-", " ").capitalize
+
   Photo.create!(
-    title: Faker::Food.dish,
-    image_url: "https://source.unsplash.com/400x300/?food,#{rand(100)}",
-    category: %w[Sushi Ramen Dessert Pizza].sample
+    title: filename.capitalize,
+    image_url: url,
+    category: category
   )
 end
