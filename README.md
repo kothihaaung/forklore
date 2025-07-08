@@ -45,7 +45,7 @@ The target user is someone who wants to explore mouth-watering food photos for i
 ## ⚙️ Backend API Setup (`backend/`)
 
 ### 📦 Requirements
-- Ruby 3.2+
+- Ruby 3.3+
 - Rails 8+
 - SQLite (default)
 - Bundler
