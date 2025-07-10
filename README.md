@@ -22,9 +22,6 @@ A simple yet polished **photo viewer app** built with **React Native (Expo)** an
 ### 📱 App Description
 This mobile app allows users to browse high-quality food photos categorized by type (e.g., sushi, burger, pizza). Users can filter by category and tap on any photo to view more details like title and photographer.
 
-### 👤 Target User Problem
-The target user is someone who wants to explore mouth-watering food photos for inspiration — for cooking, menu design, or just visual enjoyment.
-
 ### ✅ How the App Solves It
 - Clean two-column photo grid layout for quick browsing  
 - Filters by food category  
@@ -38,7 +35,6 @@ The target user is someone who wants to explore mouth-watering food photos for i
 - Modular code structure with hooks
 - Expo-compatible; works on both Android and iOS
 - RESTful API with clean JSON responses
-- No hardcoded data in frontend
 
 ---
 
