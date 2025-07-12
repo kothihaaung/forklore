@@ -1,4 +1,4 @@
-# 📸 Photo Viewer App — Full Stack Mobile Tech Exercise
+# 📸 Photo Viewer App — Full Stack Mobile Tech Experience
 
 A simple yet polished **photo viewer app** built with **React Native (Expo)** and **Ruby on Rails API**, designed to help users explore a gallery of food photography filtered by category.
 
