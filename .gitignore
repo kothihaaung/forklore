@@ -6,8 +6,7 @@ mobile/photo-viewer/.env
 # Backend Temp Files
 backend/tmp/
 backend/log/
-backend/storage/*.sqlite3-shm
-backend/storage/*.sqlite3-wal
+backend/storage/
 
 # Node Modules
 node_modules/
