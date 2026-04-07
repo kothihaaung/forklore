@@ -22,6 +22,7 @@ export default function RecipeGridScreen() {
         selectedCategory,
         setSelectedCategory,
         categories,
+        isPro,
     } = useRecipes();
 
     const colorScheme = useColorScheme();
@@ -57,7 +58,14 @@ export default function RecipeGridScreen() {
     return (
         <View style={[styles.container, { backgroundColor: theme.background }]}>
             <View style={styles.header}>
-              <Text style={[styles.greeting, { color: theme.icon }]}>Hello, Gourmet!</Text>
+              <View style={styles.titleRow}>
+                <Text style={[styles.greeting, { color: theme.icon }]}>Hello, Gourmet!</Text>
+                {isPro && (
+                  <View style={[styles.proBadge, { backgroundColor: theme.premium }]}>
+                    <Text style={styles.proBadgeText}>PRO</Text>
+                  </View>
+                )}
+              </View>
               <Text style={[styles.headline, { color: theme.text }]}>What are we cooking today?</Text>
             </View>
 
@@ -101,12 +109,27 @@ const styles = StyleSheet.create({
       paddingTop: 20,
       paddingBottom: 10,
     },
+    titleRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 4,
+    },
     greeting: {
       fontSize: 14,
       fontWeight: '600',
       textTransform: 'uppercase',
       letterSpacing: 1.2,
-      marginBottom: 4,
+    },
+    proBadge: {
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 12,
+    },
+    proBadgeText: {
+      color: '#FFF',
+      fontSize: 10,
+      fontWeight: '900',
     },
     headline: {
       fontSize: 28,

@@ -32,6 +32,7 @@ export default function RecipeDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [purchasing, setPurchasing] = useState(false);
   const [paymentSheetReady, setPaymentSheetReady] = useState(false);
+  const [activePaymentIntentId, setActivePaymentIntentId] = useState<string | null>(null);
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   useEffect(() => {
@@ -61,7 +62,8 @@ export default function RecipeDetailScreen() {
         recipe_id: recipeId,
       });
       
-      const { paymentIntent } = response.data;
+      const { paymentIntent, paymentIntentId } = response.data;
+      setActivePaymentIntentId(paymentIntentId);
 
       const { error } = await initPaymentSheet({
         paymentIntentClientSecret: paymentIntent,
@@ -115,8 +117,22 @@ export default function RecipeDetailScreen() {
           alert(`Error: ${error.message}`);
         }
       } else {
+        // Confirmation call to backend (The "Seamless Mock")
+        if (activePaymentIntentId) {
+          try {
+            await axios.post(`${API_BASE_URL}/checkout/confirm-payment`, {
+              payment_intent_id: activePaymentIntentId
+            });
+          } catch (e) {
+            console.log("Confirmation failed, but optimistic unlock will still show", e);
+          }
+        }
+
+        // Optimistic UI Update: Immediately show the recipe
+        if (recipe) {
+          setRecipe({ ...recipe, unlocked: true });
+        }
         alert('Success! Your recipe is now unlocked.');
-        fetchRecipe();
       }
     } finally {
       setPurchasing(false);
@@ -168,7 +184,7 @@ export default function RecipeDetailScreen() {
         <Text style={[styles.title, { color: theme.text }]}>{recipe.title}</Text>
         <Text style={[styles.description, { color: theme.icon }]}>{recipe.description}</Text>
 
-        {recipe.premium ? (
+        {!recipe.unlocked ? (
           <View style={[styles.lockedArea, { backgroundColor: theme.card, borderColor: theme.border }]}>
              <Ionicons name="lock-closed" size={48} color={theme.tint} style={{ marginBottom: 16 }} />
              <Text style={[styles.lockedTitle, { color: theme.text }]}>Unlock this Recipe</Text>

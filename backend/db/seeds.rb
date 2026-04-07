@@ -2,8 +2,16 @@
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
-Category.destroy_all
+Order.destroy_all
+Subscription.destroy_all
 Recipe.destroy_all
+Category.destroy_all
+User.destroy_all
+
+test_user = User.create!(
+  email: "test@example.com",
+  password: "password123"
+)
 
 breakfast = Category.create!(name: "Breakfast")
 main_dishes = Category.create!(name: "Main Dishes")

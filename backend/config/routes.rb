@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       resources :recipes, only: [:index, :show]
       resources :categories, only: [:index]
       post 'checkout/create-payment-intent', to: 'checkout#create_payment_intent'
+      post 'checkout/create-subscription', to: 'checkout#create_subscription'
+      post 'checkout/confirm-payment', to: 'checkout#confirm_payment'
+      post 'webhooks', to: 'webhooks#create'
       post 'auth/login', to: 'auth#login'
       post 'auth/register', to: 'auth#register'
     end

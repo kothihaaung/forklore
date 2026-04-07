@@ -32,6 +32,7 @@ export function useRecipes() {
   }, [selectedCategory, recipes]);
 
   const categories = ['All', ...Array.from(new Set(recipes.map(r => r.category.name)))];
+  const isPro = recipes.some(r => r.premium && r.unlocked);
 
-  return { filteredRecipes, loading, selectedCategory, setSelectedCategory, categories };
+  return { filteredRecipes, loading, selectedCategory, setSelectedCategory, categories, isPro };
 }

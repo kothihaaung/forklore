@@ -8,6 +8,7 @@ export interface Recipe {
   cooking_time: number;
   difficulty: string;
   premium: boolean;
+  unlocked: boolean;
   price: string;
   category: {
     id: number;
