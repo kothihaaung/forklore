@@ -1,0 +1,20 @@
+# Environment Files
+backend/.env
+mobile/photo-viewer/.env
+.env
+
+# Backend Temp Files
+backend/tmp/
+backend/storage/*.sqlite3-shm
+backend/storage/*.sqlite3-wal
+
+# Node Modules
+node_modules/
+mobile/photo-viewer/node_modules/
+
+# Logs
+*.log
+backend/log/*.log
+
+# macOS
+.DS_Store

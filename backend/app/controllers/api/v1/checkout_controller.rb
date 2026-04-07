@@ -26,6 +26,8 @@ module Api
           }
         rescue Stripe::StripeError => e
           render json: { error: e.message }, status: 400
+        rescue => e
+          render json: { error: e.message }, status: 500
         end
       end
     end
