@@ -1,9 +1,9 @@
-import PhotoGridScreen from '@/screens/PhotoGridScreen';
+import RecipeGridScreen from '@/screens/RecipeGridScreen';
 import React from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function TestScreen() {
+export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -12,11 +12,11 @@ export default function TestScreen() {
         styles.container,
         {
           paddingTop: insets.top,
-          paddingBottom: Platform.OS === "android" ? 0 : insets.bottom + 33 + 16, // 33 for the tab bar height, 16 for bottom padding
+          paddingBottom: Platform.OS === "android" ? 0 : insets.bottom + 33 + 16,
         },
       ]}
     >
-      <PhotoGridScreen />
+      <RecipeGridScreen />
     </View>
   );
 }
@@ -26,4 +26,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-

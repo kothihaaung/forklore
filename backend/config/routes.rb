@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :photos, only: [:index]
+      resources :recipes, only: [:index, :show]
+      resources :categories, only: [:index]
+      post 'checkout/create-payment-intent', to: 'checkout#create_payment_intent'
+      post 'auth/login', to: 'auth#login'
+      post 'auth/register', to: 'auth#register'
     end
   end
 end

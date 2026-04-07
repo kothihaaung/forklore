@@ -1,0 +1,22 @@
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/bootsnap-1.18.6/ext/bootsnap
+/Users/thihathedev/.rbenv/versions/3.4.4/bin/ruby extconf.rb
+checking for fdatasync() in unistd.h... yes
+checking for whether -D_GNU_SOURCE is accepted as CPPFLAGS... yes
+checking for whether -O3 is accepted as CFLAGS... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/bootsnap-1.18.6/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-2h4mci sitelibdir\=./.gem.20260407-84609-2h4mci clean
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/bootsnap-1.18.6/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-2h4mci sitelibdir\=./.gem.20260407-84609-2h4mci
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/bootsnap-1.18.6/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-2h4mci sitelibdir\=./.gem.20260407-84609-2h4mci install
+/opt/homebrew/bin/ginstall -c -m 0755 bootsnap.bundle ./.gem.20260407-84609-2h4mci/bootsnap
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/bootsnap-1.18.6/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-2h4mci sitelibdir\=./.gem.20260407-84609-2h4mci clean

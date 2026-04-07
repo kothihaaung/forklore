@@ -41,6 +41,13 @@
             "buildReactNativeFromSource": true
           }
         }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.leothihaaung.photoviewer",
+          "enableGooglePay": true
+        }
       ]
     ],
     "experiments": {

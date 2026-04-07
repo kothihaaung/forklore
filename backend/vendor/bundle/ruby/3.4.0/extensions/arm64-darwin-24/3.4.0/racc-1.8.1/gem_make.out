@@ -1,0 +1,18 @@
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/Users/thihathedev/.rbenv/versions/3.4.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-vhrbgz sitelibdir\=./.gem.20260407-84609-vhrbgz clean
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-vhrbgz sitelibdir\=./.gem.20260407-84609-vhrbgz
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-vhrbgz sitelibdir\=./.gem.20260407-84609-vhrbgz install
+/opt/homebrew/bin/ginstall -c -m 0755 cparse.bundle ./.gem.20260407-84609-vhrbgz/racc
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-vhrbgz sitelibdir\=./.gem.20260407-84609-vhrbgz clean

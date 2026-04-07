@@ -47,3 +47,9 @@ group :development, :test do
 
   gem "faker"
 end
+
+gem "stripe", "~> 19.0"
+gem "rack-cors"
+gem "bcrypt", "~> 3.1.7"
+gem "jwt"
+gem "jsonapi-serializer"

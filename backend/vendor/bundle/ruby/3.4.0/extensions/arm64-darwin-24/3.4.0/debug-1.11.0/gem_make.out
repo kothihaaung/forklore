@@ -1,0 +1,19 @@
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+/Users/thihathedev/.rbenv/versions/3.4.4/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-kw2d29 sitelibdir\=./.gem.20260407-84609-kw2d29 clean
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-kw2d29 sitelibdir\=./.gem.20260407-84609-kw2d29
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-kw2d29 sitelibdir\=./.gem.20260407-84609-kw2d29 install
+/opt/homebrew/bin/ginstall -c -m 0755 debug.bundle ./.gem.20260407-84609-kw2d29/debug
+
+current directory: /Users/thihathedev/Documents/dev/projects/ios/github/Forklore - Every dish tells a story./backend/vendor/bundle/ruby/3.4.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260407-84609-kw2d29 sitelibdir\=./.gem.20260407-84609-kw2d29 clean
