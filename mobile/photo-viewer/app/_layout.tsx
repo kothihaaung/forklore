@@ -19,7 +19,7 @@ export default function RootLayout() {
 
   return (
     <StripeProvider
-      publishableKey="pk_test_TYooMQauvdEDq54NiTphI7jx" // Placeholder Test Key
+      publishableKey={process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_TYooMQauvdEDq54NiTphI7jx"} // Loaded from .env
     >
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>

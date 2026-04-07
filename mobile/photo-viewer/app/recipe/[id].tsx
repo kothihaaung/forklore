@@ -20,7 +20,7 @@ import { Recipe } from '@/models/Recipe';
 import { useStripe } from '@stripe/stripe-react-native';
 
 const { width } = Dimensions.get('window');
-const API_BASE_URL = 'http://172.20.10.12:3000/api/v1';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api/v1';
 
 export default function RecipeDetailScreen() {
   const { id } = useLocalSearchParams();

@@ -7,13 +7,10 @@ module Api
       # Stripe.api_key = Rails.application.credentials.stripe_secret_key
 
       def create_payment_intent
-        # Set placeholder secret key if not provided (mock for development)
+        # Stripe.api_key is read from ENV['STRIPE_SECRET_KEY'] or fallback
         Stripe.api_key = ENV['STRIPE_SECRET_KEY'] || 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
 
         begin
-          # User would be authenticated and params[:recipe_id] or params[:type] passed
-          # amount = params[:amount] # in cents
-
           # For demo, default is 500 cents ($5.00)
           amount = 500
 
@@ -25,7 +22,7 @@ module Api
 
           render json: {
             paymentIntent: payment_intent.client_secret,
-            publishableKey: ENV['STRIPE_PUBLISHABLE_KEY'] || 'pk_test_TYooMQauvdEDq54NiTphI7jx' # placeholder
+            publishableKey: ENV['STRIPE_PUBLISHABLE_KEY'] || 'pk_test_TYooMQauvdEDq54NiTphI7jx'
           }
         rescue Stripe::StripeError => e
           render json: { error: e.message }, status: 400

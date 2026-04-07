@@ -2,7 +2,7 @@ import { Recipe } from '@/models/Recipe';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const API_BASE_URL = 'http://172.20.10.12:3000/api/v1'; // Update to your active IP
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api/v1';
 
 export function useRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
