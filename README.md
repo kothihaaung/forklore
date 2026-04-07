@@ -1,117 +1,84 @@
-# 📸 Photo Viewer App — Full Stack Mobile Tech Experience (SDK 55)
+# 🥗 Forklore — Every dish tells a story.
 
-A simple yet polished **photo viewer app** built with **React Native (Expo)** and **Ruby on Rails API**, designed to help users explore a gallery of food photography filtered by category.
-
----
-
-## 📱 App Screenshots
-
-### 🖼️ Light Mode
-
-| ![](./images/light-1.png) | ![](./images/light-2.png) | ![](./images/light-3.png) |
-|---------------------------|---------------------------|---------------------------|
-
-### 🌙 Dark Mode
-
-| ![](./images/dark-1.png) | ![](./images/dark-2.png) | ![](./images/dark-3.png) |
-|--------------------------|--------------------------|--------------------------|
-
-
-## 🧠 Summary
-
-### 📱 App Description
-This mobile app allows users to browse high-quality food photos categorized by type (e.g., sushi, burger, pizza). Users can filter by category and tap on any photo to view more details like title and photographer.
-
-### 💪 Strengths
-- Full-stack: React Native frontend + Rails backend
-- **Expo SDK 55** with React Native 0.83+
-- **New Architecture** (Fabric/TurboModules) enabled by default
-- Modern UI with dark/light theme
-- Responsive image aspect ratio handling
-- Modular code structure with hooks
-- RESTful API with clean JSON responses
+Forklore is a premium recipe platform built with **React Native (Expo SDK 55)** and **Ruby on Rails 8**. It features a gourmet UI, premium content locking, and a full Stripe-powered checkout experience.
 
 ---
 
-## ⚙️ Backend API Setup (`backend/`)
+## 🚀 Stripe & Environment Setup
 
-### 📦 Requirements
-- Ruby 3.3+
-- Rails 8+
-- SQLite (default)
-- Bundler
+To enable payments and recipe unlocking, you must configure environment variables in both the backend and mobile directories.
 
-### 🔧 Installation Steps
+### 1. 🔑 Get your Stripe Keys
+1.  Go to the [Stripe Dashboard](https://dashboard.stripe.com/test/apikeys).
+2.  Ensure you are in **Test Mode**.
+3.  Copy your **Publishable key** (`pk_test_...`) and **Secret key** (`sk_test_...`).
 
+### 2. 🏗️ Backend Setup (`backend/.env`)
+Create a file named `.env` in the `backend/` directory:
+```bash
+STRIPE_SECRET_KEY=sk_test_your_secret_key_here
+STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+```
+
+### 3. 📱 Mobile Setup (`mobile/photo-viewer/.env`)
+Create a file named `.env` in the `mobile/photo-viewer/` directory:
+```bash
+EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key_here
+EXPO_PUBLIC_API_URL=http://<YOUR-LOCAL-IP>:3000/api/v1
+```
+> [!IMPORTANT]
+> Replace `<YOUR-LOCAL-IP>` with your actual machine IP (e.g., `192.168.1.5`) so the physical device/simulator can reach the Rails server.
+
+---
+
+## 🔄 Testing & Database Reset
+
+### 🧪 How to Reset for Fresh Testing
+If you want to clear your purchases and test the "Unlock" button again:
+```bash
+cd backend
+bundle install
+bundle exec rails db:seed
+```
+This wipes all orders and subscriptions, resetting the app to its default state.
+
+### 🛠️ Manual Fulfillment (Developer Mock)
+In local development, Stripe Webhooks won't reach your computer unless you use the Stripe CLI. We've implemented a **Seamless Mock** so you don't have to:
+- The app automatically calls a "Confirmation" endpoint after a successful test payment.
+- The backend marks the recipe as "Unlocked" immediately.
+
+---
+
+## 🛠️ Installation & Running
+
+### Backend
 ```bash
 cd backend
 bundle install
 bin/rails db:setup
-```
-
-This will:
-- Create the database
-- Run migrations
-- Seed with food photos (title, category, photographer, image URL)
-
-### 🚀 Run the Server
-```bash
 bin/rails server -b 0.0.0.0
 ```
 
-The API will be available at:
+### Mobile
 ```bash
-http://<YOUR-IP>:3000/api/v1/photos
-```
-
-Use this IP in your mobile API code (e.g., usePhotos.ts):
-```bash
-axios.get('http://<YOUR-IP>:3000/api/v1/photos');
-```
-
-### 🌐 How to Get Your IP Address (for Expo access)
-```bash
-ipconfig getifaddr en0        # macOS
+cd mobile/photo-viewer
+npm install
+npx expo prebuild --clean # Required for first setup
+npx expo run:ios          # Run on iOS Simulator
 ```
 
 ---
 
-## ⚙️ Mobile App Setup (`mobile/`)
+## 🧠 Summary of Features
+- **Premium Locking**: Recipes are hidden behind a paywall until purchased.
+- **Go Pro**: Recurring \$9.99/mo subscription unlocks the entire catalog.
+- **Optimistic UI**: Instructions appear the millisecond payment is confirmed.
+- **Gourmet Design**: Dark/Light mode support with glassmorphism and premium badges.
 
-### 📦 Requirements
+---
 
-- **Node.js v22+ (LTS)** (Required for SDK 55 compatibility)
-- **CocoaPods 1.15+** (iOS only)
-- **Standard ASCII Paths**: Ensure project folder uses standard hyphens `-` instead of en-dashes `–` to avoid native build encoding errors.
-- Expo CLI:
-  ```bash
-  npx expo
-  ```
-
-### 📦 Install dependencies
-
+## 🌐 Get Your Local IP
+To find the IP for your `.env` file:
 ```bash
-cd mobile/photo-viewer
-npm install
+ipconfig getifaddr en0
 ```
-
-### 🚀 Run the App
-
-1. **Prebuild Native Files**:
-   ```bash
-   npx expo prebuild --clean
-   ```
-
-2. **Start the App**:
-   ```bash
-   npx expo start
-   ```
-
-3. **Run on Native**:
-   ```bash
-   npm run ios     # or npx expo run:ios
-   npm run android # or npx expo run:android
-   ```
-
-> [!NOTE]
-> This project uses the **New Architecture**. Initial builds may take longer as React Native core is compiled from source to resolve standard SDK 55 pod validation issues.
