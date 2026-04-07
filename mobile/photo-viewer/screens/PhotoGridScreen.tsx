@@ -5,9 +5,9 @@ import {
     View,
     TouchableOpacity,
     StyleSheet,
-    useColorScheme,
     ActivityIndicator,
 } from 'react-native';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { usePhotos } from '@/hooks/usePhotos';
 import { PhotoCard } from '@/components/PhotoCard';
 import { Colors } from '@/constants/Colors';
@@ -22,7 +22,7 @@ export default function PhotoGridScreen() {
     } = usePhotos();
 
     const colorScheme = useColorScheme();
-    const themeColors = Colors[colorScheme ?? 'light'];
+    const themeColors = Colors[colorScheme];
 
     const renderCategory = (category: string) => (
         <TouchableOpacity

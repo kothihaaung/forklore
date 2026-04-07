@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Photo } from '@/models/photo';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export function usePhotos() {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -10,7 +10,7 @@ export function usePhotos() {
 
   useEffect(() => {
     axios
-      .get('http://192.168.1.100:3000/api/v1/photos') // ← your IP
+      .get('http://172.20.10.12:3000/api/v1/photos') // ← your IP
       .then((response) => {
         setPhotos(response.data);
         setFilteredPhotos(response.data);
