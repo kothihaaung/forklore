@@ -132,6 +132,10 @@ export default function RecipeDetailScreen() {
         if (recipe) {
           setRecipe({ ...recipe, unlocked: true });
         }
+
+        // Fetch full data from server (to get ingredients/instructions)
+        fetchRecipe();
+        
         alert('Success! Your recipe is now unlocked.');
       }
     } finally {
