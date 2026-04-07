@@ -1,4 +1,4 @@
-# 📸 Photo Viewer App — Full Stack Mobile Tech Experience
+# 📸 Photo Viewer App — Full Stack Mobile Tech Experience (SDK 55)
 
 A simple yet polished **photo viewer app** built with **React Native (Expo)** and **Ruby on Rails API**, designed to help users explore a gallery of food photography filtered by category.
 
@@ -24,10 +24,11 @@ This mobile app allows users to browse high-quality food photos categorized by t
 
 ### 💪 Strengths
 - Full-stack: React Native frontend + Rails backend
+- **Expo SDK 55** with React Native 0.83+
+- **New Architecture** (Fabric/TurboModules) enabled by default
 - Modern UI with dark/light theme
 - Responsive image aspect ratio handling
 - Modular code structure with hooks
-- Expo-compatible; works on both Android and iOS
 - RESTful API with clean JSON responses
 
 ---
@@ -79,10 +80,12 @@ ipconfig getifaddr en0        # macOS
 
 ### 📦 Requirements
 
-- Node.js v20+
+- **Node.js v22+ (LTS)** (Required for SDK 55 compatibility)
+- **CocoaPods 1.15+** (iOS only)
+- **Standard ASCII Paths**: Ensure project folder uses standard hyphens `-` instead of en-dashes `–` to avoid native build encoding errors.
 - Expo CLI:
   ```bash
-  npm i @expo/cli
+  npx expo
   ```
 
 ### 📦 Install dependencies
@@ -94,10 +97,21 @@ npm install
 
 ### 🚀 Run the App
 
-```bash
-npx expo start
+1. **Prebuild Native Files**:
+   ```bash
+   npx expo prebuild --clean
+   ```
 
-Press i to open in iOS Simulator (macOS only)
-Press a to open in Android Emulator
-Or scan the QR code using the Expo Go app on your physical device
-```
+2. **Start the App**:
+   ```bash
+   npx expo start
+   ```
+
+3. **Run on Native**:
+   ```bash
+   npm run ios     # or npx expo run:ios
+   npm run android # or npx expo run:android
+   ```
+
+> [!NOTE]
+> This project uses the **New Architecture**. Initial builds may take longer as React Native core is compiled from source to resolve standard SDK 55 pod validation issues.
