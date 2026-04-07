@@ -31,6 +31,7 @@ export default function RecipeDetailScreen() {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [purchasing, setPurchasing] = useState(false);
+  const [paymentSheetReady, setPaymentSheetReady] = useState(false);
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   useEffect(() => {
@@ -40,7 +41,13 @@ export default function RecipeDetailScreen() {
   const fetchRecipe = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/recipes/${id}`);
-      setRecipe(response.data);
+      const data = response.data;
+      setRecipe(data);
+      
+      // If it's a premium recipe, pre-initialize the payment sheet
+      if (data.premium) {
+        initializePaymentSheet(data.id);
+      }
     } catch (error) {
       console.error('Error fetching recipe:', error);
     } finally {
@@ -48,41 +55,69 @@ export default function RecipeDetailScreen() {
     }
   };
 
-  const handlePurchase = async () => {
-    setPurchasing(true);
+  const initializePaymentSheet = async (recipeId: number) => {
     try {
-      // 1. Fetch PaymentIntent client secret from backend
       const response = await axios.post(`${API_BASE_URL}/checkout/create-payment-intent`, {
-        recipe_id: id,
+        recipe_id: recipeId,
       });
       
-      const { paymentIntent, publishableKey } = response.data;
+      const { paymentIntent } = response.data;
 
-      // 2. Initialize Payment Sheet
-      const { error: initError } = await initPaymentSheet({
+      const { error } = await initPaymentSheet({
         paymentIntentClientSecret: paymentIntent,
         merchantDisplayName: 'Forklore Recipes',
+        allowsDelayedPaymentMethods: true,
         defaultBillingDetails: {
           name: 'Jane Doe',
-        }
+        },
+        appearance: {
+          colors: {
+            primary: theme.tint,
+          },
+          shapes: {
+            borderRadius: 12,
+          },
+        },
       });
 
-      if (initError) {
-        alert(`Error: ${initError.message}`);
-        return;
-      }
-
-      // 3. Present Payment Sheet
-      const { error: presentError } = await presentPaymentSheet();
-
-      if (presentError) {
-        alert(`Error: ${presentError.message}`);
-      } else {
-        alert('Success! Your recipe is now unlocked.');
-        // In a real app, we would refresh the state to show ingredients
+      if (!error) {
+        setPaymentSheetReady(true);
       }
     } catch (e) {
-      console.log(e);
+      console.log('Payment sheet init failed', e);
+    }
+  };
+
+  const handlePurchase = async () => {
+    if (!paymentSheetReady) {
+      // If for some reason it wasn't ready, try to initialize it now
+      setPurchasing(true);
+      await initializePaymentSheet(Number(id));
+      
+      // Give UI a frame to breath before presenting
+      setTimeout(() => {
+        openPaymentSheet();
+      }, 100);
+      return;
+    }
+
+    openPaymentSheet();
+  };
+
+  const openPaymentSheet = async () => {
+    setPurchasing(true);
+    try {
+      const { error } = await presentPaymentSheet();
+
+      if (error) {
+        console.log('Payment sheet error', error);
+        if (error.code !== 'Canceled') {
+          alert(`Error: ${error.message}`);
+        }
+      } else {
+        alert('Success! Your recipe is now unlocked.');
+        fetchRecipe();
+      }
     } finally {
       setPurchasing(false);
     }
