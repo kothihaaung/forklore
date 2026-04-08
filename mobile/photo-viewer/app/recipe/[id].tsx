@@ -18,6 +18,9 @@ import { Colors } from '@/constants/Colors';
 import axios from 'axios';
 import { Recipe } from '@/models/Recipe';
 import { useStripe } from '@stripe/stripe-react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { toggleFavorite } from '@/store/favoritesSlice';
 
 const { width } = Dimensions.get('window');
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/api/v1';
@@ -25,6 +28,7 @@ const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000/a
 export default function RecipeDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  const dispatch = useDispatch();
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   
@@ -34,6 +38,9 @@ export default function RecipeDetailScreen() {
   const [paymentSheetReady, setPaymentSheetReady] = useState(false);
   const [activePaymentIntentId, setActivePaymentIntentId] = useState<string | null>(null);
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
+
+  const favorites = useSelector((state: RootState) => state.favorites.items);
+  const isFavorite = favorites.some((item) => item.id === Number(id));
 
   useEffect(() => {
     fetchRecipe();
@@ -53,6 +60,12 @@ export default function RecipeDetailScreen() {
       console.error('Error fetching recipe:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleToggleFavorite = () => {
+    if (recipe) {
+      dispatch(toggleFavorite(recipe));
     }
   };
 
@@ -155,90 +168,126 @@ export default function RecipeDetailScreen() {
   const instructions = JSON.parse(recipe.instructions || "[]");
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: theme.background }]} showsVerticalScrollIndicator={false}>
-      {/* Header Image */}
-      <View style={styles.header}>
-        <Image source={{ uri: recipe.image_url }} style={styles.image} />
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <BlurView intensity={20} style={styles.backBlur}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      {/* Fixed Navigation Overlays */}
+      <View style={styles.fixedHeader}>
+        <TouchableOpacity style={styles.navButton} onPress={() => router.back()}>
+          <BlurView intensity={30} style={styles.navBlur}>
             <Ionicons name="chevron-back" size={24} color="#FFF" />
           </BlurView>
         </TouchableOpacity>
-        
-        {recipe.premium && (
-           <View style={styles.premiumOverlay}>
-              <BlurView intensity={30} style={styles.premiumBadgeLarge}>
-                <Ionicons name="sparkles" size={20} color={theme.premium} />
-                <Text style={[styles.premiumTextLarge, { color: theme.premium }]}>PREMIUM RECIPE</Text>
-              </BlurView>
-           </View>
-        )}
+
+        <TouchableOpacity style={styles.navButton} onPress={handleToggleFavorite}>
+          <BlurView intensity={30} style={styles.navBlur}>
+            <Ionicons 
+              name={isFavorite ? "bookmark" : "bookmark-outline"} 
+              size={22} 
+              color={isFavorite ? theme.tint : "#FFF"} 
+            />
+          </BlurView>
+        </TouchableOpacity>
       </View>
 
-      {/* Content */}
-      <View style={[styles.content, { borderTopLeftRadius: 32, borderTopRightRadius: 32, marginTop: -30, backgroundColor: theme.background }]}>
-        <View style={styles.metaRow}>
-          <Text style={[styles.category, { color: theme.tint }]}>{recipe.category.name}</Text>
-          <View style={styles.timeTag}>
-            <Ionicons name="time-outline" size={16} color={theme.icon} />
-            <Text style={[styles.timeText, { color: theme.icon }]}>{recipe.cooking_time} min</Text>
-          </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header Image */}
+        <View style={styles.header}>
+          <Image source={{ uri: recipe.image_url }} style={styles.image} />
+          
+          {recipe.premium && (
+            <View style={styles.premiumOverlay}>
+                <BlurView intensity={30} style={styles.premiumBadgeLarge}>
+                  <Ionicons name="sparkles" size={20} color={theme.premium} />
+                  <Text style={[styles.premiumTextLarge, { color: theme.premium }]}>PREMIUM RECIPE</Text>
+                </BlurView>
+            </View>
+          )}
         </View>
 
-        <Text style={[styles.title, { color: theme.text }]}>{recipe.title}</Text>
-        <Text style={[styles.description, { color: theme.icon }]}>{recipe.description}</Text>
-
-        {!recipe.unlocked ? (
-          <View style={[styles.lockedArea, { backgroundColor: theme.card, borderColor: theme.border }]}>
-             <Ionicons name="lock-closed" size={48} color={theme.tint} style={{ marginBottom: 16 }} />
-             <Text style={[styles.lockedTitle, { color: theme.text }]}>Unlock this Recipe</Text>
-             <Text style={[styles.lockedDesc, { color: theme.icon }]}>Get full access to ingredients and step-by-step instructions for a small one-time payment.</Text>
-             
-             <TouchableOpacity 
-              style={[styles.buyButton, { backgroundColor: theme.tint }]}
-              onPress={handlePurchase}
-              disabled={purchasing}
-             >
-                {purchasing ? (
-                  <ActivityIndicator color="#FFF" />
-                ) : (
-                  <Text style={styles.buyButtonText}>Unlock for ${recipe.price || "4.99"}</Text>
-                )}
-             </TouchableOpacity>
-
-             <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
-                <Text style={[styles.subscribeText, { color: theme.tint }]}>Or subscribe for full access</Text>
-             </TouchableOpacity>
+        {/* Content */}
+        <View style={[styles.content, { borderTopLeftRadius: 32, borderTopRightRadius: 32, marginTop: -30, backgroundColor: theme.background }]}>
+          <View style={styles.metaRow}>
+            <Text style={[styles.category, { color: theme.tint }]}>{recipe.category.name}</Text>
+            <View style={styles.timeTag}>
+              <Ionicons name="time-outline" size={16} color={theme.icon} />
+              <Text style={[styles.timeText, { color: theme.icon }]}>{recipe.cooking_time} min</Text>
+            </View>
           </View>
-        ) : (
-          <View style={styles.recipeContent}>
-             <Text style={[styles.sectionTitle, { color: theme.text }]}>Ingredients</Text>
-             {ingredients.map((item: string, index: number) => (
-                <View key={index} style={styles.ingredientRow}>
-                   <View style={[styles.dot, { backgroundColor: theme.tint }]} />
-                   <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
-                </View>
-             ))}
 
-             <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 32 }]}>Instructions</Text>
-             {instructions.map((item: string, index: number) => (
-                <View key={index} style={styles.stepRow}>
-                   <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
-                      <Text style={styles.stepNumberText}>{index + 1}</Text>
-                   </View>
-                   <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
-                </View>
-             ))}
-          </View>
-        )}
-      </View>
-    </ScrollView>
+          <Text style={[styles.title, { color: theme.text }]}>{recipe.title}</Text>
+          <Text style={[styles.description, { color: theme.icon }]}>{recipe.description}</Text>
+
+          {!recipe.unlocked ? (
+            <View style={[styles.lockedArea, { backgroundColor: theme.card, borderColor: theme.border }]}>
+               <Ionicons name="lock-closed" size={48} color={theme.tint} style={{ marginBottom: 16 }} />
+               <Text style={[styles.lockedTitle, { color: theme.text }]}>Unlock this Recipe</Text>
+               <Text style={[styles.lockedDesc, { color: theme.icon }]}>Get full access to ingredients and step-by-step instructions for a small one-time payment.</Text>
+               
+               <TouchableOpacity 
+                style={[styles.buyButton, { backgroundColor: theme.tint }]}
+                onPress={handlePurchase}
+                disabled={purchasing}
+               >
+                  {purchasing ? (
+                    <ActivityIndicator color="#FFF" />
+                  ) : (
+                    <Text style={styles.buyButtonText}>Unlock for ${recipe.price || "4.99"}</Text>
+                  )}
+               </TouchableOpacity>
+
+               <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
+                  <Text style={[styles.subscribeText, { color: theme.tint }]}>Or subscribe for full access</Text>
+               </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.recipeContent}>
+               <Text style={[styles.sectionTitle, { color: theme.text }]}>Ingredients</Text>
+               {ingredients.map((item: string, index: number) => (
+                  <View key={index} style={styles.ingredientRow}>
+                     <View style={[styles.dot, { backgroundColor: theme.tint }]} />
+                     <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
+                  </View>
+               ))}
+
+               <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 32 }]}>Instructions</Text>
+               {instructions.map((item: string, index: number) => (
+                  <View key={index} style={styles.stepRow}>
+                     <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
+                        <Text style={styles.stepNumberText}>{index + 1}</Text>
+                     </View>
+                     <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
+                  </View>
+               ))}
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  fixedHeader: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: Platform.OS === 'ios' ? 60 : 40,
+  },
+  navButton: {
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  navBlur: {
+    padding: 10,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    borderRadius: 20,
   },
   loader: {
     flex: 1,
@@ -248,22 +297,10 @@ const styles = StyleSheet.create({
   header: {
     height: 400,
     width: '100%',
-    position: 'relative',
   },
   image: {
     width: '100%',
     height: '100%',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    borderRadius: 20,
-    overflow: 'hidden',
-  },
-  backBlur: {
-    padding: 8,
-    backgroundColor: 'rgba(0,0,0,0.3)',
   },
   premiumOverlay: {
     position: 'absolute',
@@ -374,9 +411,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
     marginRight: 12,
   },
   ingredientText: {

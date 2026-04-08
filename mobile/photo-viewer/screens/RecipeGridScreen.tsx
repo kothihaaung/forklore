@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
-    FlatList,
+    Animated,
     Text,
     View,
     TouchableOpacity,
@@ -14,6 +14,7 @@ import { RecipeCard } from '@/components/RecipeCard';
 import { Colors } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
+const HEADER_HEIGHT = 120; // Height of the greeting + headline area
 
 export default function RecipeGridScreen() {
     const {
@@ -27,6 +28,21 @@ export default function RecipeGridScreen() {
 
     const colorScheme = useColorScheme();
     const theme = Colors[colorScheme ?? 'light'];
+    
+    const scrollY = useRef(new Animated.Value(0)).current;
+
+    // Interpolations for header animation
+    const headerOpacity = scrollY.interpolate({
+      inputRange: [0, 80],
+      outputRange: [1, 0],
+      extrapolate: 'clamp',
+    });
+
+    const headerTranslateY = scrollY.interpolate({
+      inputRange: [0, 80],
+      outputRange: [0, -40],
+      extrapolate: 'clamp',
+    });
 
     const renderCategory = (category: string) => (
         <TouchableOpacity
@@ -57,7 +73,14 @@ export default function RecipeGridScreen() {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.background }]}>
-            <View style={styles.header}>
+            {/* Animated Header */}
+            <Animated.View style={[
+              styles.header, 
+              { 
+                opacity: headerOpacity, 
+                transform: [{ translateY: headerTranslateY }] 
+              }
+            ]}>
               <View style={styles.titleRow}>
                 <Text style={[styles.greeting, { color: theme.icon }]}>Hello, Gourmet!</Text>
                 {isPro && (
@@ -67,17 +90,18 @@ export default function RecipeGridScreen() {
                 )}
               </View>
               <Text style={[styles.headline, { color: theme.text }]}>What are we cooking today?</Text>
-            </View>
+            </Animated.View>
 
-            <View style={styles.filterBar}>
-                <FlatList
-                    data={categories}
-                    renderItem={({ item }) => renderCategory(item)}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item) => item}
-                    contentContainerStyle={styles.categoryList}
-                />
+            {/* Sticky Category Bar Overlay (simplified with a background view) */}
+            <View style={[styles.filterBarContainer, { backgroundColor: theme.background }]}>
+              <Animated.FlatList
+                  data={categories}
+                  renderItem={({ item }) => renderCategory(item)}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyExtractor={(item) => item}
+                  contentContainerStyle={styles.categoryList}
+              />
             </View>
 
             {loading ? (
@@ -86,7 +110,7 @@ export default function RecipeGridScreen() {
                   <Text style={[styles.loaderText, { color: theme.text }]}>Preparing your menu...</Text>
                 </View>
             ) : (
-                <FlatList
+                <Animated.FlatList
                     data={filteredRecipes}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => <RecipeCard recipe={item} />}
@@ -94,6 +118,11 @@ export default function RecipeGridScreen() {
                     columnWrapperStyle={styles.row}
                     contentContainerStyle={styles.grid}
                     showsVerticalScrollIndicator={false}
+                    onScroll={Animated.event(
+                      [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                      { useNativeDriver: true }
+                    )}
+                    scrollEventThrottle={16}
                 />
             )}
         </View>
@@ -136,8 +165,9 @@ const styles = StyleSheet.create({
       fontWeight: '800',
       lineHeight: 34,
     },
-    filterBar: {
+    filterBarContainer: {
         paddingVertical: 16,
+        zIndex: 5,
     },
     categoryList: {
       paddingHorizontal: 20,
