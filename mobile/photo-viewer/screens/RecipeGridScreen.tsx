@@ -15,7 +15,7 @@ import { RecipeCard } from '@/components/RecipeCard';
 import { Colors } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
-const HEADER_MAX_HEIGHT = 120; // Height of the greeting + headline area
+const HEADER_MAX_HEIGHT = 120; // Adjusted for a tighter fit
 
 export default function RecipeGridScreen() {
   const {
@@ -30,26 +30,26 @@ export default function RecipeGridScreen() {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
 
-  // We must use useNativeDriver: false because we are animating 'height', 
-  // which is a layout property not supported by the native driver.
   const scrollY = useRef(new Animated.Value(0)).current;
 
-  // Interpolations for header animation
+  // 1. Fade the text out early
   const headerOpacity = scrollY.interpolate({
-    inputRange: [0, 60],
+    inputRange: [0, 50],
     outputRange: [1, 0],
     extrapolate: 'clamp',
   });
 
-  const headerHeight = scrollY.interpolate({
-    inputRange: [0, 80],
-    outputRange: [HEADER_MAX_HEIGHT, 0],
+  // 2. Slide the header up (Using TranslateY for performance)
+  const headerTranslateY = scrollY.interpolate({
+    inputRange: [0, HEADER_MAX_HEIGHT],
+    outputRange: [0, -HEADER_MAX_HEIGHT],
     extrapolate: 'clamp',
   });
 
-  const headerTranslateY = scrollY.interpolate({
-    inputRange: [0, 80],
-    outputRange: [0, -20],
+  // 3. This pulls the content below UP to fill the gap left by the translating header
+  const contentTranslateY = scrollY.interpolate({
+    inputRange: [0, HEADER_MAX_HEIGHT],
+    outputRange: [0, -HEADER_MAX_HEIGHT],
     extrapolate: 'clamp',
   });
 
@@ -82,15 +82,15 @@ export default function RecipeGridScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      {/* Animated Header Section */}
-      <View>
+      {/* Wrapping the Header and Category bar in an Animated View 
+         that moves up as you scroll.
+      */}
+      <Animated.View style={{ transform: [{ translateY: headerTranslateY }], zIndex: 10 }}>
         <Animated.View style={[
           styles.header,
           {
             opacity: headerOpacity,
-            height: headerHeight,
-            overflow: 'hidden',
-            transform: [{ translateY: headerTranslateY }]
+            height: HEADER_MAX_HEIGHT,
           }
         ]}>
           <View style={styles.titleRow}>
@@ -104,7 +104,6 @@ export default function RecipeGridScreen() {
           <Text style={[styles.headline, { color: theme.text }]}>What are we cooking today?</Text>
         </Animated.View>
 
-        {/* Sticky Category Bar - This stays relatively positioned but stays top when header is 0 */}
         <View style={[styles.filterBarContainer, { backgroundColor: theme.background }]}>
           <FlatList
             data={categories}
@@ -115,7 +114,7 @@ export default function RecipeGridScreen() {
             contentContainerStyle={styles.categoryList}
           />
         </View>
-      </View>
+      </Animated.View>
 
       {loading ? (
         <View style={styles.loader}>
@@ -131,9 +130,10 @@ export default function RecipeGridScreen() {
           columnWrapperStyle={styles.row}
           contentContainerStyle={styles.grid}
           showsVerticalScrollIndicator={false}
+          style={{ transform: [{ translateY: contentTranslateY }] }} // Moves the list up with the header
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: false } // MUST BE FALSE for height animation
+            { useNativeDriver: true } // NATIVE DRIVER IS NOW TRUE - SMOOTH!
           )}
           scrollEventThrottle={16}
         />
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 8,
+    justifyContent: 'center',
   },
   titleRow: {
     flexDirection: 'row',
@@ -179,8 +179,7 @@ const styles = StyleSheet.create({
     lineHeight: 34,
   },
   filterBarContainer: {
-    paddingTop: 0,
-    paddingBottom: 12,
+    paddingVertical: 12,
     zIndex: 5,
   },
   categoryList: {
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     paddingHorizontal: 16,
-    paddingBottom: 40,
+    paddingBottom: 150, // Added padding to compensate for the translation
   },
   row: {
     justifyContent: 'space-between',
