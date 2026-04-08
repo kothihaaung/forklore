@@ -4,6 +4,10 @@ This is the React Native (Expo) front-end for the **Photo Viewer App**, which di
 
 ---
 
+## 📱 App Screenshots
+
+![App Showcase](./images/cover.png)
+
 ## 🚀 Features
 
 - 📷 Responsive photo **grid layout** for iOS & Android
