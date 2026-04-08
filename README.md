@@ -4,6 +4,10 @@ Forklore is a premium recipe platform built with **React Native (Expo SDK 55)** 
 
 ---
 
+## 📱 App Screenshots
+
+![App Showcase](./images/cover.png)
+
 ## 🚀 Stripe & Environment Setup
 
 To enable payments and recipe unlocking, you must configure environment variables in both the backend and mobile directories.

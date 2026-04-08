@@ -1,12 +1,8 @@
-# 📱 Photo Viewer App (React Native)
+# 📱 Forklore - Every dish tells a story. (React Native)
 
-This is the React Native (Expo) front-end for the **Photo Viewer App**, which displays a grid of food photos and allows users to filter by category and view detailed photo information. It connects to a Ruby on Rails backend API that provides photo data.
+This is the React Native (Expo) front-end for the **Forklore - Every dish tells a story.**, which displays a grid of food photos and allows users to filter by category and view detailed photo information. It connects to a Ruby on Rails backend API that provides photo data.
 
 ---
-
-## 📱 App Screenshots
-
-![App Showcase](./images/cover.png)
 
 ## 🚀 Features
 
