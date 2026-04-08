@@ -230,33 +230,33 @@ export default function RecipeDetailScreen() {
                   {purchasing ? (
                     <ActivityIndicator color="#FFF" />
                   ) : (
-                    <Text style={styles.buyButtonText}>Unlock for ${recipe.price || "4.99"}</Text>
-                  )}
-               </TouchableOpacity>
+                   <Text style={[styles.buyButtonText, { color: theme.buttonText }]}>Unlock for ${recipe.price || "4.99"}</Text>
+                 )}
+              </TouchableOpacity>
 
-               <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
-                  <Text style={[styles.subscribeText, { color: theme.tint }]}>Or subscribe for full access</Text>
-               </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.recipeContent}>
-               <Text style={[styles.sectionTitle, { color: theme.text }]}>Ingredients</Text>
-               {ingredients.map((item: string, index: number) => (
-                  <View key={index} style={styles.ingredientRow}>
-                     <View style={[styles.dot, { backgroundColor: theme.tint }]} />
-                     <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
-                  </View>
-               ))}
+              <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
+                 <Text style={[styles.subscribeText, { color: theme.tint }]}>Or subscribe for full access</Text>
+              </TouchableOpacity>
+           </View>
+         ) : (
+           <View style={styles.recipeContent}>
+              <Text style={[styles.sectionTitle, { color: theme.text }]}>Ingredients</Text>
+              {ingredients.map((item: string, index: number) => (
+                 <View key={index} style={styles.ingredientRow}>
+                    <View style={[styles.dot, { backgroundColor: theme.tint }]} />
+                    <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
+                 </View>
+              ))}
 
-               <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 32 }]}>Instructions</Text>
-               {instructions.map((item: string, index: number) => (
-                  <View key={index} style={styles.stepRow}>
-                     <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
-                        <Text style={styles.stepNumberText}>{index + 1}</Text>
-                     </View>
-                     <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
-                  </View>
-               ))}
+              <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 32 }]}>Instructions</Text>
+              {instructions.map((item: string, index: number) => (
+                 <View key={index} style={styles.stepRow}>
+                    <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
+                       <Text style={[styles.stepNumberText, { color: theme.buttonText }]}>{index + 1}</Text>
+                    </View>
+                    <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
+                 </View>
+              ))}
             </View>
           )}
         </View>

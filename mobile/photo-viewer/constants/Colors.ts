@@ -11,7 +11,8 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     card: '#F8F9FA',
     border: '#E9ECEF',
-    premium: '#D4AF37', // Gold for premium badges
+    premium: '#D4AF37',
+    buttonText: '#FFFFFF',
   },
   dark: {
     text: '#ECEDEE',
@@ -23,5 +24,6 @@ export const Colors = {
     card: '#1A1A1A',
     border: '#2C2C2C',
     premium: '#FFD700',
+    buttonText: '#0D0D0D',
   },
 };

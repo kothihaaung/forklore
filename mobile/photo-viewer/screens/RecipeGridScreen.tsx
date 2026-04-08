@@ -71,7 +71,7 @@ export default function RecipeGridScreen() {
           styles.categoryText,
           {
             color:
-              selectedCategory === category ? '#FFF' : theme.text,
+              selectedCategory === category ? theme.buttonText : theme.text,
           }
         ]}
       >
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     paddingTop: 20,
+    paddingBottom: 8,
   },
   titleRow: {
     flexDirection: 'row',
@@ -178,7 +179,8 @@ const styles = StyleSheet.create({
     lineHeight: 34,
   },
   filterBarContainer: {
-    paddingVertical: 16,
+    paddingTop: 0,
+    paddingBottom: 12,
     zIndex: 5,
   },
   categoryList: {
