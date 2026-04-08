@@ -31,7 +31,7 @@ export default function RecipeDetailScreen() {
   const dispatch = useDispatch();
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
-  
+
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [purchasing, setPurchasing] = useState(false);
@@ -51,7 +51,7 @@ export default function RecipeDetailScreen() {
       const response = await axios.get(`${API_BASE_URL}/recipes/${id}`);
       const data = response.data;
       setRecipe(data);
-      
+
       // If it's a premium recipe, pre-initialize the payment sheet
       if (data.premium) {
         initializePaymentSheet(data.id);
@@ -74,7 +74,7 @@ export default function RecipeDetailScreen() {
       const response = await axios.post(`${API_BASE_URL}/checkout/create-payment-intent`, {
         recipe_id: recipeId,
       });
-      
+
       const { paymentIntent, paymentIntentId } = response.data;
       setActivePaymentIntentId(paymentIntentId);
 
@@ -108,7 +108,7 @@ export default function RecipeDetailScreen() {
       // If for some reason it wasn't ready, try to initialize it now
       setPurchasing(true);
       await initializePaymentSheet(Number(id));
-      
+
       // Give UI a frame to breath before presenting
       setTimeout(() => {
         openPaymentSheet();
@@ -148,7 +148,7 @@ export default function RecipeDetailScreen() {
 
         // Fetch full data from server (to get ingredients/instructions)
         fetchRecipe();
-        
+
         alert('Success! Your recipe is now unlocked.');
       }
     } finally {
@@ -179,10 +179,10 @@ export default function RecipeDetailScreen() {
 
         <TouchableOpacity style={styles.navButton} onPress={handleToggleFavorite}>
           <BlurView intensity={30} style={styles.navBlur}>
-            <Ionicons 
-              name={isFavorite ? "bookmark" : "bookmark-outline"} 
-              size={22} 
-              color={isFavorite ? theme.tint : "#FFF"} 
+            <Ionicons
+              name={isFavorite ? "bookmark" : "bookmark-outline"}
+              size={22}
+              color={isFavorite ? theme.tint : "#FFF"}
             />
           </BlurView>
         </TouchableOpacity>
@@ -192,13 +192,13 @@ export default function RecipeDetailScreen() {
         {/* Header Image */}
         <View style={styles.header}>
           <Image source={{ uri: recipe.image_url }} style={styles.image} />
-          
+
           {recipe.premium && (
             <View style={styles.premiumOverlay}>
-                <BlurView intensity={30} style={styles.premiumBadgeLarge}>
-                  <Ionicons name="sparkles" size={20} color={theme.premium} />
-                  <Text style={[styles.premiumTextLarge, { color: theme.premium }]}>PREMIUM RECIPE</Text>
-                </BlurView>
+              <BlurView intensity={30} style={styles.premiumBadgeLarge}>
+                <Ionicons name="sparkles" size={20} color={theme.premium} />
+                <Text style={[styles.premiumTextLarge, { color: theme.premium }]}>PREMIUM RECIPE</Text>
+              </BlurView>
             </View>
           )}
         </View>
@@ -218,44 +218,44 @@ export default function RecipeDetailScreen() {
 
           {!recipe.unlocked ? (
             <View style={[styles.lockedArea, { backgroundColor: theme.card, borderColor: theme.border }]}>
-               <Ionicons name="lock-closed" size={48} color={theme.tint} style={{ marginBottom: 16 }} />
-               <Text style={[styles.lockedTitle, { color: theme.text }]}>Unlock this Recipe</Text>
-               <Text style={[styles.lockedDesc, { color: theme.icon }]}>Get full access to ingredients and step-by-step instructions for a small one-time payment.</Text>
-               
-               <TouchableOpacity 
+              <Ionicons name="lock-closed" size={48} color={theme.tint} style={{ marginBottom: 16 }} />
+              <Text style={[styles.lockedTitle, { color: theme.text }]}>Unlock this Recipe</Text>
+              <Text style={[styles.lockedDesc, { color: theme.icon }]}>Get full access to ingredients and step-by-step instructions for a small one-time payment.</Text>
+
+              <TouchableOpacity
                 style={[styles.buyButton, { backgroundColor: theme.tint }]}
                 onPress={handlePurchase}
                 disabled={purchasing}
-               >
-                  {purchasing ? (
-                    <ActivityIndicator color="#FFF" />
-                  ) : (
-                   <Text style={[styles.buyButtonText, { color: theme.buttonText }]}>Unlock for ${recipe.price || "4.99"}</Text>
-                 )}
+              >
+                {purchasing ? (
+                  <ActivityIndicator color="#FFF" />
+                ) : (
+                  <Text style={[styles.buyButtonText, { color: theme.buttonText }]}>Unlock for ${recipe.price || "4.99"}</Text>
+                )}
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
+              {/* <TouchableOpacity style={styles.subscribeLink} onPress={() => router.push('/subscription')}>
                  <Text style={[styles.subscribeText, { color: theme.tint }]}>Or subscribe for full access</Text>
-              </TouchableOpacity>
-           </View>
-         ) : (
-           <View style={styles.recipeContent}>
+              </TouchableOpacity> */}
+            </View>
+          ) : (
+            <View style={styles.recipeContent}>
               <Text style={[styles.sectionTitle, { color: theme.text }]}>Ingredients</Text>
               {ingredients.map((item: string, index: number) => (
-                 <View key={index} style={styles.ingredientRow}>
-                    <View style={[styles.dot, { backgroundColor: theme.tint }]} />
-                    <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
-                 </View>
+                <View key={index} style={styles.ingredientRow}>
+                  <View style={[styles.dot, { backgroundColor: theme.tint }]} />
+                  <Text style={[styles.ingredientText, { color: theme.text }]}>{item}</Text>
+                </View>
               ))}
 
               <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 32 }]}>Instructions</Text>
               {instructions.map((item: string, index: number) => (
-                 <View key={index} style={styles.stepRow}>
-                    <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
-                       <Text style={[styles.stepNumberText, { color: theme.buttonText }]}>{index + 1}</Text>
-                    </View>
-                    <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
-                 </View>
+                <View key={index} style={styles.stepRow}>
+                  <View style={[styles.stepNumber, { backgroundColor: theme.tint }]}>
+                    <Text style={[styles.stepNumberText, { color: theme.buttonText }]}>{index + 1}</Text>
+                  </View>
+                  <Text style={[styles.stepText, { color: theme.text }]}>{item}</Text>
+                </View>
               ))}
             </View>
           )}
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     borderRadius: 16,
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 0,
   },
   buyButtonText: {
     color: '#FFF',

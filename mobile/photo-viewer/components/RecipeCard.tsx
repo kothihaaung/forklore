@@ -29,24 +29,24 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   };
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       activeOpacity={0.8}
       style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
       onPress={() => router.push({ pathname: "/recipe/[id]", params: { id: recipe.id } })}
     >
       <View style={styles.imageContainer}>
         <Image source={{ uri: recipe.image_url }} style={styles.image} resizeMode="cover" />
-        
-        <TouchableOpacity 
-          style={styles.saveButton} 
+
+        <TouchableOpacity
+          style={styles.saveButton}
           onPress={handleToggleFavorite}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <BlurView intensity={30} style={styles.saveBlur}>
-            <Ionicons 
-              name={isFavorite ? "bookmark" : "bookmark-outline"} 
-              size={18} 
-              color={isFavorite ? theme.tint : "#FFF"} 
+            <Ionicons
+              name={isFavorite ? "bookmark" : "bookmark-outline"}
+              size={18}
+              color={isFavorite ? theme.tint : "#FFF"}
             />
           </BlurView>
         </TouchableOpacity>
@@ -59,21 +59,21 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         )}
         <View style={styles.timeTag}>
           <BlurView intensity={20} style={styles.timeBlur}>
-             <Ionicons name="time-outline" size={12} color="#FFF" />
-             <Text style={styles.timeText}>{recipe.cooking_time} min</Text>
+            <Ionicons name="time-outline" size={12} color="#FFF" />
+            <Text style={styles.timeText}>{recipe.cooking_time} min</Text>
           </BlurView>
         </View>
       </View>
-      
+
       <View style={styles.content}>
         <Text style={[styles.category, { color: theme.tint }]}>{recipe.category.name}</Text>
         <Text style={[styles.title, { color: theme.text }]} numberOfLines={2}>{recipe.title}</Text>
-        
+
         <View style={styles.footer}>
-            <View style={styles.metaItem}>
-                <Ionicons name="stats-chart" size={14} color="#687076" />
-                <Text style={styles.metaText}>{recipe.difficulty}</Text>
-            </View>
+          <View style={styles.metaItem}>
+            <Ionicons name="stats-chart" size={14} color="#687076" />
+            <Text style={styles.metaText}>{recipe.difficulty}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   saveBlur: {
     padding: 6,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(112, 112, 112, 0.5)',
   },
   premiumBadge: {
     position: 'absolute',
