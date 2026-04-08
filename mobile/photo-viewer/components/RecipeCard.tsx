@@ -7,6 +7,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { useRouter } from 'expo-router';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { toggleFavorite } from '@/store/favoritesSlice';
+
 interface RecipeCardProps {
   recipe: Recipe;
 }
@@ -15,6 +19,14 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme ?? 'light'];
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const favorites = useSelector((state: RootState) => state.favorites.items);
+  const isFavorite = favorites.some((item) => item.id === recipe.id);
+
+  const handleToggleFavorite = () => {
+    dispatch(toggleFavorite(recipe));
+  };
 
   return (
     <TouchableOpacity 
@@ -24,6 +36,21 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
     >
       <View style={styles.imageContainer}>
         <Image source={{ uri: recipe.image_url }} style={styles.image} resizeMode="cover" />
+        
+        <TouchableOpacity 
+          style={styles.saveButton} 
+          onPress={handleToggleFavorite}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <BlurView intensity={30} style={styles.saveBlur}>
+            <Ionicons 
+              name={isFavorite ? "bookmark" : "bookmark-outline"} 
+              size={18} 
+              color={isFavorite ? theme.tint : "#FFF"} 
+            />
+          </BlurView>
+        </TouchableOpacity>
+
         {recipe.premium && (
           <BlurView intensity={20} style={styles.premiumBadge}>
             <Ionicons name="sparkles" size={12} color={theme.premium} />
@@ -74,6 +101,18 @@ const styles = StyleSheet.create({
   image: {
     height: '100%',
     width: '100%',
+  },
+  saveButton: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    zIndex: 10,
+    borderRadius: 15,
+    overflow: 'hidden',
+  },
+  saveBlur: {
+    padding: 6,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   premiumBadge: {
     position: 'absolute',
