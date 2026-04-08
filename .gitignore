@@ -18,3 +18,4 @@ backend/log/*.log
 
 # macOS
 .DS_Store
+backend/storage/*.sqlite3
